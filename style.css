@@ -106,7 +106,7 @@ body {
 .icon-btn:active { background: rgba(128,128,128,0.15); }
 
 #theme-btn-wrap {
-  width: 72px;
+  width: 120px;
   height: 48px;
   overflow: hidden;
   border-radius: 24px;
@@ -117,7 +117,8 @@ body {
   justify-content: center;
 }
 #theme-btn-wrap theme-button {
-  display: block;
+  display: inline-block;
+  line-height: 0;
 }
 
 .hidden { display: none !important; }
