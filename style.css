@@ -1,25 +1,22 @@
 /* ============================================================
    TPOB Reader Web - style.css
-   Material 3 风格，与 Android 端一致
+   精确匹配 Android 端 Material 3 规格
    ============================================================ */
 
-/* ========== 日间主题 (match Android) ========== */
+/* ========== 日间 (match Color.kt) ========== */
 :root {
   --primary: #5B4A3F;
   --on-primary: #FFFFFF;
   --primary-container: #EFDBD0;
   --on-primary-container: #1F130C;
   --secondary: #6B5E53;
-  --on-secondary: #FFFFFF;
   --background: #FBF5F0;
   --on-background: #1F130C;
   --surface: #FBF5F0;
   --on-surface: #1F130C;
   --surface-variant: #E7DDD5;
   --on-surface-variant: #4A433D;
-  --outline: #7A736C;
   --error: #BA1A1A;
-  --on-error: #FFFFFF;
 
   --reader-bg: #F5F0E8;
   --reader-text: #2D2D2D;
@@ -29,27 +26,22 @@
   --reader-quote: #666666;
 
   --card-bg: rgba(231, 221, 213, 0.5);
-  --shadow: 0 1px 3px rgba(0,0,0,0.08);
-  --header-border: rgba(0,0,0,0.06);
 }
 
-/* ========== 夜间主题 ========== */
+/* ========== 夜间 (match Color.kt) ========== */
 .dark {
   --primary: #D4BBA5;
   --on-primary: #3D2E24;
   --primary-container: #3D2E24;
   --on-primary-container: #EFDBD0;
   --secondary: #C4B5A8;
-  --on-secondary: #3D2E24;
   --background: #1A1A1A;
   --on-background: #E0E0E0;
   --surface: #2D2D2D;
   --on-surface: #E0E0E0;
   --surface-variant: #3D3D3D;
   --on-surface-variant: #C4B5A8;
-  --outline: #8E857E;
   --error: #FFB4AB;
-  --on-error: #690005;
 
   --reader-bg: #1A1A1A;
   --reader-text: #C8C8C8;
@@ -59,8 +51,6 @@
   --reader-quote: #A0A0A0;
 
   --card-bg: rgba(61, 61, 61, 0.5);
-  --shadow: 0 1px 3px rgba(0,0,0,0.3);
-  --header-border: rgba(255,255,255,0.06);
 }
 
 /* ========== 基础 ========== */
@@ -75,7 +65,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* ========== 顶部导航 ========== */
+/* ========== Header (match TopAppBar) ========== */
 #header {
   position: sticky;
   top: 0;
@@ -85,7 +75,7 @@ body {
   height: 56px;
   padding: 0 4px;
   background: var(--background);
-  border-bottom: 1px solid var(--header-border);
+  border-bottom: none;
 }
 #header-title {
   flex: 1;
@@ -96,7 +86,7 @@ body {
   text-overflow: ellipsis;
   white-space: nowrap;
   padding: 0 8px;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
 }
 .icon-btn {
   background: none;
@@ -111,13 +101,12 @@ body {
   color: var(--on-surface);
   flex-shrink: 0;
   transition: background 0.2s;
-  -webkit-tap-highlight-color: transparent;
 }
-.icon-btn:hover { background: rgba(128,128,128,0.1); }
-.icon-btn:active { background: rgba(128,128,128,0.2); }
+.icon-btn:hover { background: rgba(128,128,128,0.08); }
+.icon-btn:active { background: rgba(128,128,128,0.15); }
 .hidden { display: none !important; }
 
-/* ========== 书架 ========== */
+/* ========== 书架 (match LibraryScreen) ========== */
 #view-library {
   padding: 12px;
   padding-bottom: 80px;
@@ -137,7 +126,7 @@ body {
 .empty-hint svg { margin-bottom: 16px; }
 .empty-hint .sub { font-size: 14px; margin-top: 8px; opacity: 0.7; }
 
-/* FAB */
+/* FAB (match FloatingActionButton, containerColor = primary) */
 .fab {
   position: fixed;
   bottom: 24px;
@@ -146,21 +135,20 @@ body {
   height: 56px;
   border-radius: 16px;
   border: none;
-  background: var(--primary-container);
-  color: var(--on-primary-container);
+  background: var(--primary);
+  color: var(--on-primary);
   cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  box-shadow: 0 3px 5px rgba(0,0,0,0.2);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 90;
-  transition: box-shadow 0.2s, background 0.2s;
-  -webkit-tap-highlight-color: transparent;
+  transition: box-shadow 0.2s, opacity 0.2s;
 }
-.fab:hover { box-shadow: 0 6px 12px rgba(0,0,0,0.2); }
-.fab:active { background: var(--primary); color: var(--on-primary); }
+.fab:hover { box-shadow: 0 6px 10px rgba(0,0,0,0.25); }
+.fab:active { opacity: 0.85; }
 
-/* ========== 书籍卡片 ========== */
+/* ========== 书籍卡片 (match BookCard) ========== */
 .book-card {
   background: var(--card-bg);
   border-radius: 8px;
@@ -168,7 +156,6 @@ body {
   cursor: pointer;
   user-select: none;
   transition: background 0.15s;
-  -webkit-tap-highlight-color: transparent;
 }
 .book-card:active { background: var(--surface-variant); }
 .book-cover {
@@ -191,7 +178,6 @@ body {
   font-size: 22px;
   font-weight: 700;
   color: var(--on-primary-container);
-  line-height: 1;
 }
 .book-title {
   font-size: 14px;
@@ -215,11 +201,11 @@ body {
   text-overflow: ellipsis;
 }
 
-/* ========== 阅读器 ========== */
+/* ========== 阅读器 (match ReaderScreen + wrapHtml) ========== */
 #view-reader {
-  background: var(--reader-bg);
   min-height: calc(100dvh - 56px);
   padding: 16px 20px 40px;
+  background: var(--reader-bg);
   transition: background 0.3s;
 }
 .reader-content {
@@ -254,7 +240,7 @@ body {
   background: var(--reader-code-bg);
   padding: 2px 6px;
   border-radius: 3px;
-  font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", monospace;
+  font-family: "JetBrains Mono", "Fira Code", monospace;
   font-size: 0.88em;
 }
 .reader-content pre {
@@ -307,7 +293,7 @@ body {
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* ========== 对话框 ========== */
+/* ========== 对话框 (match AlertDialog) ========== */
 .dialog-overlay {
   position: fixed;
   inset: 0;
@@ -326,11 +312,17 @@ body {
   width: 100%;
   box-shadow: 0 8px 24px rgba(0,0,0,0.2);
 }
+.dialog-box h3 {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: var(--on-surface);
+}
 .dialog-box p {
-  margin-bottom: 24px;
   font-size: 14px;
   line-height: 1.5;
   color: var(--on-surface-variant);
+  margin-bottom: 24px;
 }
 .dialog-actions {
   display: flex;
@@ -346,15 +338,14 @@ body {
   cursor: pointer;
   font-size: 14px;
   font-weight: 500;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.03em;
   transition: background 0.2s;
-  -webkit-tap-highlight-color: transparent;
 }
 .btn:hover { background: rgba(128,128,128,0.08); }
 .btn:active { background: rgba(128,128,128,0.15); }
 .btn-danger { color: var(--error); }
 
-/* ========== Toast ========== */
+/* ========== Toast (match Snackbar) ========== */
 .toast {
   position: fixed;
   bottom: 96px;
@@ -372,7 +363,6 @@ body {
 }
 @keyframes toast-in { from { opacity: 0; transform: translateX(-50%) translateY(8px); } }
 
-/* ========== 响应式 ========== */
 @media (min-width: 600px) {
   .books-grid { grid-template-columns: repeat(4, 1fr); }
 }
