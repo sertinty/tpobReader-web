@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>TPOB Reader</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- 顶部导航 -->
+<header id="header">
+  <button id="btn-back" class="icon-btn hidden" title="返回">←</button>
+  <h1 id="header-title">TPOB 阅读器</h1>
+  <button id="btn-theme" class="icon-btn" title="切换主题">🌙</button>
+</header>
+
+<!-- 书架视图 -->
+<main id="view-library">
+  <div id="books-grid" class="books-grid"></div>
+  <div id="empty-hint" class="empty-hint hidden">
+    <div class="empty-icon">📚</div>
+    <p>书架上还没有书</p>
+    <p class="sub">点击下方按钮导入 .tpob 文件</p>
+  </div>
+  <button id="btn-import" class="fab" title="导入书籍">+</button>
+  <input type="file" id="file-input" accept=".tpob,.zip" hidden>
+</main>
+
+<!-- 阅读器视图 -->
+<main id="view-reader" class="hidden">
+  <div id="reader-content" class="reader-content"></div>
+</main>
+
+<!-- 加载提示 -->
+<div id="loading" class="loading hidden">
+  <div class="spinner"></div>
+  <p id="loading-text">正在导入…</p>
+</div>
+
+<!-- 确认对话框 -->
+<div id="dialog" class="dialog-overlay hidden">
+  <div class="dialog-box">
+    <p id="dialog-text"></p>
+    <div class="dialog-actions">
+      <button id="dialog-cancel" class="btn">取消</button>
+      <button id="dialog-confirm" class="btn btn-danger">删除</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
