@@ -105,8 +105,6 @@ var el = {
   headerTitle: $('#header-title'),
   btnBack: $('#btn-back'),
   btnTheme: $('#btn-theme'),
-  iconNight: $('#icon-night'),
-  iconDay: $('#icon-day'),
   viewLibrary: $('#view-library'),
   viewReader: $('#view-reader'),
   booksGrid: $('#books-grid'),
@@ -128,20 +126,16 @@ var currentBookId = null;
 
 // ==================== 主题 ====================
 function initTheme() {
-  if (localStorage.getItem('tpob-theme') === 'dark') {
+  var saved = localStorage.getItem('tpob-theme') || 'light';
+  if (saved === 'dark') {
     document.body.classList.add('dark');
-    el.iconNight.classList.add('hidden');
-    el.iconDay.classList.remove('hidden');
-    el.btnTheme.title = '日间模式';
+    el.btnTheme.setAttribute('value', 'dark');
   }
 }
-function toggleTheme() {
-  var dark = document.body.classList.toggle('dark');
-  localStorage.setItem('tpob-theme', dark ? 'dark' : 'light');
-  el.iconNight.classList.toggle('hidden', dark);
-  el.iconDay.classList.toggle('hidden', !dark);
-  el.btnTheme.title = dark ? '日间模式' : '夜间模式';
-  // 重新渲染阅读器以应用颜色
+function onThemeChange(e) {
+  var theme = e.detail;
+  document.body.classList.toggle('dark', theme === 'dark');
+  localStorage.setItem('tpob-theme', theme);
   if (currentView === 'reader' && currentBookId) {
     renderReader(currentBookId);
   }
@@ -286,7 +280,7 @@ function esc(s) {
 }
 
 // ==================== 事件 ====================
-el.btnTheme.addEventListener('click', toggleTheme);
+el.btnTheme.addEventListener('change', onThemeChange);
 el.btnBack.addEventListener('click', showLibrary);
 el.btnImport.addEventListener('click', function() { el.fileInput.click(); });
 el.fileInput.addEventListener('change', function(e) { handleImport(e.target.files[0]); e.target.value = ''; });
