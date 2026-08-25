@@ -179,7 +179,6 @@ function showLibrary() {
   el.viewLibrary.classList.remove('hidden');
   el.viewReader.classList.add('hidden');
   el.btnBack.classList.add('hidden');
-  el.btnTheme.classList.add('hidden');
   el.headerTitle.textContent = '书架';
   el.btnImport.classList.remove('hidden');
   renderLibrary();
