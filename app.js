@@ -220,18 +220,32 @@ async function renderLibrary() {
         card.addEventListener('click', function() { showReader(book.id); });
 
         var timer;
-        card.addEventListener('pointerdown', function() {
+        var longPressed = false;
+
+        function startLongPress(e) {
+          longPressed = false;
           timer = setTimeout(function() {
+            longPressed = true;
             showDialog('删除书籍', '确定要删除\u300C' + book.title + '\u300D吗？', async function() {
               await deleteBook(book.id);
               toast('已删除');
               renderLibrary();
             });
           }, 600);
+        }
+        function cancelLongPress() { clearTimeout(timer); }
+
+        card.addEventListener('touchstart', startLongPress, { passive: true });
+        card.addEventListener('touchend', function(e) {
+          cancelLongPress();
+          if (longPressed) e.preventDefault();
         });
-        card.addEventListener('pointerup', function() { clearTimeout(timer); });
-        card.addEventListener('pointerleave', function() { clearTimeout(timer); });
-        card.addEventListener('pointercancel', function() { clearTimeout(timer); });
+        card.addEventListener('touchmove', cancelLongPress, { passive: true });
+        card.addEventListener('touchcancel', cancelLongPress);
+        card.addEventListener('pointerdown', startLongPress);
+        card.addEventListener('pointerup', cancelLongPress);
+        card.addEventListener('pointerleave', cancelLongPress);
+        card.addEventListener('pointercancel', cancelLongPress);
 
         el.booksGrid.appendChild(card);
       })(books[i]);
