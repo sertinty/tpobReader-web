@@ -104,6 +104,23 @@ body {
 }
 .icon-btn:hover { background: rgba(128,128,128,0.08); }
 .icon-btn:active { background: rgba(128,128,128,0.15); }
+
+#theme-btn-wrap {
+  width: 120px;
+  height: 48px;
+  overflow: hidden;
+  border-radius: 24px;
+  flex-shrink: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#theme-btn-wrap theme-button {
+  display: inline-block;
+  line-height: 0;
+}
+
 .hidden { display: none !important; }
 
 /* ========== 书架 (match LibraryScreen) ========== */
